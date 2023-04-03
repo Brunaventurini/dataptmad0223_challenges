@@ -1,0 +1,8 @@
+SELECT payment.customer_id,
+       customer.email,
+       SUM(amount)::float AS total_amount, COUNT(amount) AS payments_count
+FROM payment,
+     customer
+WHERE payment.customer_id = customer.customer_id
+GROUP BY payment.customer_id, customer.email
+ORDER BY total_amount DESC limit 10
